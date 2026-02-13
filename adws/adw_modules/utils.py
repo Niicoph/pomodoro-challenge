@@ -174,24 +174,24 @@ def get_safe_subprocess_env() -> Dict[str, str]:
     safe_env_vars = {
         # Anthropic Configuration (required)
         "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
-        
+
         # GitHub Configuration (optional)
         # GITHUB_PAT is optional - if not set, will use default gh auth
         "GITHUB_PAT": os.getenv("GITHUB_PAT"),
-        
+
         # Claude Code Configuration
         "CLAUDE_CODE_PATH": os.getenv("CLAUDE_CODE_PATH", "claude"),
         "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": os.getenv(
             "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR", "true"
         ),
-        
+
         # Agent Cloud Sandbox Environment (optional)
         "E2B_API_KEY": os.getenv("E2B_API_KEY"),
-        
+
         # Cloudflare tunnel token (optional)
         "CLOUDFLARED_TUNNEL_TOKEN": os.getenv("CLOUDFLARED_TUNNEL_TOKEN"),
-        
-        # Essential system environment variables
+
+        # Essential system environment variables (Unix/Linux/Mac)
         "HOME": os.getenv("HOME"),
         "USER": os.getenv("USER"),
         "PATH": os.getenv("PATH"),
@@ -199,11 +199,24 @@ def get_safe_subprocess_env() -> Dict[str, str]:
         "TERM": os.getenv("TERM"),
         "LANG": os.getenv("LANG"),
         "LC_ALL": os.getenv("LC_ALL"),
-        
+
+        # Windows-specific environment variables
+        "SYSTEMROOT": os.getenv("SYSTEMROOT"),
+        "WINDIR": os.getenv("WINDIR"),
+        "TEMP": os.getenv("TEMP"),
+        "TMP": os.getenv("TMP"),
+        "USERPROFILE": os.getenv("USERPROFILE"),
+        "APPDATA": os.getenv("APPDATA"),
+        "LOCALAPPDATA": os.getenv("LOCALAPPDATA"),
+        "PROGRAMFILES": os.getenv("PROGRAMFILES"),
+        "PROGRAMFILES(X86)": os.getenv("PROGRAMFILES(X86)"),
+        "COMPUTERNAME": os.getenv("COMPUTERNAME"),
+        "USERDOMAIN": os.getenv("USERDOMAIN"),
+
         # Python-specific variables that subprocesses might need
         "PYTHONPATH": os.getenv("PYTHONPATH"),
         "PYTHONUNBUFFERED": "1",  # Useful for subprocess output
-        
+
         # Working directory tracking
         "PWD": os.getcwd(),
     }
