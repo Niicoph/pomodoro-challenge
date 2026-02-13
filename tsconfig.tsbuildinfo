@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/cycleselector.tsx","./src/components/pomodorotimer.tsx","./src/components/timercontrols.tsx","./src/components/timerdisplay.tsx","./src/hooks/usetimer.ts","./src/types/timer.ts"],"version":"5.9.3"}
