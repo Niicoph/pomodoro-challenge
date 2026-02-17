@@ -1,0 +1,366 @@
+[
+  {
+    "type": "system",
+    "subtype": "init",
+    "cwd": "C:\\Users\\Nicolás\\Desktop\\tac\\pomodoro-challenge\\adws",
+    "session_id": "2d8c5119-d142-48e1-b1c1-21e1bc72b8a9",
+    "tools": [
+      "Task",
+      "TaskOutput",
+      "Bash",
+      "Glob",
+      "Grep",
+      "ExitPlanMode",
+      "Read",
+      "Edit",
+      "Write",
+      "NotebookEdit",
+      "WebFetch",
+      "TodoWrite",
+      "WebSearch",
+      "TaskStop",
+      "AskUserQuestion",
+      "Skill",
+      "EnterPlanMode"
+    ],
+    "mcp_servers": [],
+    "model": "claude-sonnet-4-5-20250929",
+    "permissionMode": "bypassPermissions",
+    "slash_commands": [
+      "keybindings-help",
+      "debug",
+      "bug",
+      "chore",
+      "classify_issue",
+      "commit",
+      "conditional_docs",
+      "document",
+      "feature",
+      "generate_branch_name",
+      "implement",
+      "install",
+      "patch",
+      "prime",
+      "pull_request",
+      "review",
+      "start",
+      "test",
+      "e2e:test_dark_mode",
+      "e2e:test_focus_statistics",
+      "e2e:test_notifications",
+      "e2e:test_pomodoro_timer",
+      "e2e:test_task_categories",
+      "e2e:test_task_filtering",
+      "e2e:test_task_management",
+      "compact",
+      "context",
+      "cost",
+      "init",
+      "pr-comments",
+      "release-notes",
+      "review",
+      "security-review",
+      "insights"
+    ],
+    "apiKeySource": "ANTHROPIC_API_KEY",
+    "claude_code_version": "2.1.44",
+    "output_style": "default",
+    "agents": [
+      "Bash",
+      "general-purpose",
+      "statusline-setup",
+      "Explore",
+      "Plan"
+    ],
+    "skills": [
+      "keybindings-help",
+      "debug"
+    ],
+    "plugins": [],
+    "uuid": "360124d2-cc35-44f6-aae4-8930e95968e1",
+    "fast_mode_state": "off"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-sonnet-4-5-20250929",
+      "id": "msg_01NvikQKWJNBQd1Go3r6dkQx",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "I'll create a git commit following the specified format. Let me first check the changes that have been made."
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "usage": {
+        "input_tokens": 3,
+        "cache_creation_input_tokens": 7089,
+        "cache_read_input_tokens": 13617,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 7089,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 3,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "2d8c5119-d142-48e1-b1c1-21e1bc72b8a9",
+    "uuid": "429c9eab-4edd-4a28-b2a9-21e23c519390"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-sonnet-4-5-20250929",
+      "id": "msg_01NvikQKWJNBQd1Go3r6dkQx",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01EkgA7vmmSvNWC9gbbcYv55",
+          "name": "Bash",
+          "input": {
+            "command": "git diff HEAD",
+            "description": "Check all changes made in the repository"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "usage": {
+        "input_tokens": 3,
+        "cache_creation_input_tokens": 7089,
+        "cache_read_input_tokens": 13617,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 7089,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 3,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "2d8c5119-d142-48e1-b1c1-21e1bc72b8a9",
+    "uuid": "f3e3c177-b457-4e09-a209-74154946e399"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01EkgA7vmmSvNWC9gbbcYv55",
+          "type": "tool_result",
+          "content": "diff --git a/src/components/CycleSelector.tsx b/src/components/CycleSelector.tsx\nindex 8b3dc49..7c33fef 100644\n--- a/src/components/CycleSelector.tsx\n+++ b/src/components/CycleSelector.tsx\n@@ -1,13 +1,13 @@\n-import { CycleType, CYCLE_LABELS } from '../types/timer';\n+import { CycleType, CYCLE_LABELS } from '../types/timer'\n \n-const CYCLE_TYPES: CycleType[] = ['work', 'shortBreak', 'longBreak'];\n+const CYCLE_TYPES: CycleType[] = ['work', 'shortBreak', 'longBreak']\n \n export default function CycleSelector({\n   currentCycle,\n   onSwitchCycle,\n }: {\n-  currentCycle: CycleType;\n-  onSwitchCycle: (cycle: CycleType) => void;\n+  currentCycle: CycleType\n+  onSwitchCycle: (cycle: CycleType) => void\n }) {\n   return (\n     <div className=\"flex items-center gap-2\">\n@@ -25,5 +25,5 @@ export default function CycleSelector({\n         </button>\n       ))}\n     </div>\n-  );\n+  )\n }\ndiff --git a/src/components/PomodoroTimer.tsx b/src/components/PomodoroTimer.tsx\nindex 9243db8..74a7b27 100644\n--- a/src/components/PomodoroTimer.tsx\n+++ b/src/components/PomodoroTimer.tsx\n@@ -1,11 +1,14 @@\n+import { useState, useCallback } from 'react'\n import { useTimer } from '../hooks/useTimer'\n import { useNotifications } from '../hooks/useNotifications'\n-import { CycleType } from '../types/timer'\n+import { useSessionHistory } from '../hooks/useSessionHistory'\n+import { CycleType, CYCLE_DURATIONS } from '../types/timer'\n import TimerDisplay from './TimerDisplay'\n import TimerControls from './TimerControls'\n import CycleSelector from './CycleSelector'\n import NotificationBanner from './NotificationBanner'\n import NotificationSettings from './NotificationSettings'\n+import StatisticsModal from './StatisticsModal'\n \n const CYCLE_COLORS: Record<CycleType, string> = {\n   work: 'from-rose-500 to-red-600',\n@@ -23,8 +26,19 @@ export default function PomodoroTimer() {\n     requestBrowserPermission,\n   } = useNotifications()\n \n+  const { recordSession, getStatistics, getDailyFocusData } = useSessionHistory()\n+  const [isStatsOpen, setIsStatsOpen] = useState(false)\n+\n+  const handleTimerComplete = useCallback(\n+    (cycleType: CycleType) => {\n+      triggerNotification(cycleType)\n+      recordSession(cycleType, CYCLE_DURATIONS[cycleType])\n+    },\n+    [triggerNotification, recordSession]\n+  )\n+\n   const { timeRemaining, isRunning, currentCycle, start, pause, reset, switchCycle } =\n-    useTimer(triggerNotification)\n+    useTimer(handleTimerComplete)\n \n   return (\n     <div\n@@ -42,6 +56,28 @@ export default function PomodoroTimer() {\n         onUpdateSettings={updateSettings}\n         onRequestPermission={requestBrowserPermission}\n       />\n+      <div className=\"fixed top-4 left-4 z-40\">\n+        <button\n+          onClick={() => setIsStatsOpen(true)}\n+          className=\"p-2.5 rounded-xl bg-white/20 hover:bg-white/30 active:scale-95 transition-all duration-200 text-white\"\n+          aria-label=\"Focus statistics\"\n+        >\n+          <svg\n+            xmlns=\"http://www.w3.org/2000/svg\"\n+            viewBox=\"0 0 24 24\"\n+            fill=\"currentColor\"\n+            className=\"w-5 h-5\"\n+          >\n+            <path d=\"M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z\" />\n+          </svg>\n+        </button>\n+      </div>\n+      <StatisticsModal\n+        isOpen={isStatsOpen}\n+        onClose={() => setIsStatsOpen(false)}\n+        getStatistics={getStatistics}\n+        getDailyFocusData={getDailyFocusData}\n+      />\n       <p className=\"text-white/70 text-sm font-medium tracking-widest uppercase mb-8\">\n         Pomodoro Timer\n       </p>\ndiff --git a/src/components/TimerControls.tsx b/src/components/TimerControls.tsx\nindex f8d4743..d1fd79a 100644\n--- a/src/components/TimerControls.tsx\n+++ b/src/components/TimerControls.tsx\n@@ -4,10 +4,10 @@ export default function TimerControls({\n   onPause,\n   onReset,\n }: {\n-  isRunning: boolean;\n-  onStart: () => void;\n-  onPause: () => void;\n-  onReset: () => void;\n+  isRunning: boolean\n+  onStart: () => void\n+  onPause: () => void\n+  onReset: () => void\n }) {\n   return (\n     <div className=\"flex items-center gap-4\">\n@@ -68,5 +68,5 @@ export default function TimerControls({\n         Reset\n       </button>\n     </div>\n-  );\n+  )\n }\ndiff --git a/src/components/TimerDisplay.tsx b/src/components/TimerDisplay.tsx\nindex 1eb888a..a2aaa00 100644\n--- a/src/components/TimerDisplay.tsx\n+++ b/src/components/TimerDisplay.tsx\n@@ -1,15 +1,15 @@\n function formatTime(seconds: number): string {\n-  const mins = Math.floor(seconds / 60);\n-  const secs = seconds % 60;\n-  return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;\n+  const mins = Math.floor(seconds / 60)\n+  const secs = seconds % 60\n+  return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`\n }\n \n export default function TimerDisplay({\n   timeRemaining,\n   isRunning,\n }: {\n-  timeRemaining: number;\n-  isRunning: boolean;\n+  timeRemaining: number\n+  isRunning: boolean\n }) {\n   return (\n     <div\n@@ -19,5 +19,5 @@ export default function TimerDisplay({\n     >\n       {formatTime(timeRemaining)}\n     </div>\n-  );\n+  )\n }\ndiff --git a/src/main.tsx b/src/main.tsx\nindex 3d7150d..c4fc9bb 100644\n--- a/src/main.tsx\n+++ b/src/main.tsx\n@@ -6,5 +6,5 @@ import './index.css'\n ReactDOM.createRoot(document.getElementById('root')!).render(\n   <React.StrictMode>\n     <App />\n-  </React.StrictMode>,\n+  </React.StrictMode>\n )\ndiff --git a/src/types/timer.ts b/src/types/timer.ts\nindex 7e78565..76347a8 100644\n--- a/src/types/timer.ts\n+++ b/src/types/timer.ts\n@@ -1,26 +1,26 @@\n-export type CycleType = 'work' | 'shortBreak' | 'longBreak';\n+export type CycleType = 'work' | 'shortBreak' | 'longBreak'\n \n export const CYCLE_DURATIONS: Record<CycleType, number> = {\n   work: 1500,\n   shortBreak: 300,\n   longBreak: 900,\n-};\n+}\n \n export const CYCLE_LABELS: Record<CycleType, string> = {\n   work: 'Work',\n   shortBreak: 'Short Break',\n   longBreak: 'Long Break',\n-};\n+}\n \n export interface TimerState {\n-  timeRemaining: number;\n-  isRunning: boolean;\n-  currentCycle: CycleType;\n+  timeRemaining: number\n+  isRunning: boolean\n+  currentCycle: CycleType\n }\n \n export interface TimerActions {\n-  start: () => void;\n-  pause: () => void;\n-  reset: () => void;\n-  switchCycle: (cycle: CycleType) => void;\n+  start: () => void\n+  pause: () => void\n+  reset: () => void\n+  switchCycle: (cycle: CycleType) => void\n }\ndiff --git a/tailwind.config.js b/tailwind.config.js\nindex 6d6808c..e30ebd1 100644\n--- a/tailwind.config.js\n+++ b/tailwind.config.js\n@@ -10,6 +10,8 @@ export default {\n         'pulse-slow': 'pulse-slow 2s ease-in-out infinite',\n         'notification-enter': 'notification-enter 0.3s ease-out',\n         'notification-exit': 'notification-exit 0.3s ease-in',\n+        'modal-enter': 'modal-enter 0.2s ease-out',\n+        'modal-backdrop-enter': 'modal-backdrop-enter 0.15s ease-out',\n       },\n       keyframes: {\n         'pulse-slow': {\n@@ -24,6 +26,14 @@ export default {\n           '0%': { opacity: '1', transform: 'translate(-50%, 0)' },\n           '100%': { opacity: '0', transform: 'translate(-50%, -100%)' },\n         },\n+        'modal-enter': {\n+          '0%': { opacity: '0', transform: 'scale(0.95)' },\n+          '100%': { opacity: '1', transform: 'scale(1)' },\n+        },\n+        'modal-backdrop-enter': {\n+          '0%': { opacity: '0' },\n+          '100%': { opacity: '1' },\n+        },\n       },\n     },\n   },\ndiff --git a/tsconfig.tsbuildinfo b/tsconfig.tsbuildinfo\nindex b318da4..f92382a 100644\n--- a/tsconfig.tsbuildinfo\n+++ b/tsconfig.tsbuildinfo\n@@ -1 +1 @@\n-{\"root\":[\"./src/app.tsx\",\"./src/main.tsx\",\"./src/vite-env.d.ts\",\"./src/components/cycleselector.tsx\",\"./src/components/pomodorotimer.tsx\",\"./src/components/timercontrols.tsx\",\"./src/components/timerdisplay.tsx\",\"./src/hooks/usetimer.ts\",\"./src/types/timer.ts\"],\"version\":\"5.9.3\"}\n\\ No newline at end of file\n+{\"root\":[\"./src/app.tsx\",\"./src/main.tsx\",\"./src/vite-env.d.ts\",\"./src/components/cycleselector.tsx\",\"./src/components/notificationbanner.tsx\",\"./src/components/notificationsettings.tsx\",\"./src/components/pomodorotimer.tsx\",\"./src/components/statisticschart.tsx\",\"./src/components/statisticsmodal.tsx\",\"./src/components/timercontrols.tsx\",\"./src/components/timerdisplay.tsx\",\"./src/hooks/usenotifications.ts\",\"./src/hooks/usesessionhistory.ts\",\"./src/hooks/usetimer.ts\",\"./src/types/notifications.ts\",\"./src/types/statistics.ts\",\"./src/types/timer.ts\",\"./src/utils/audio.ts\"],\"version\":\"5.9.3\"}\n\\ No newline at end of file\r\nwarning: in the working copy of 'src/App.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/CycleSelector.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/NotificationBanner.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/NotificationSettings.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/PomodoroTimer.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/TimerControls.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/TimerDisplay.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/hooks/useNotifications.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/hooks/useTimer.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/index.css', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/main.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/types/notifications.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/types/timer.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/utils/audio.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/vite-env.d.ts', LF will be replaced by CRLF the next time Git touches it",
+          "is_error": false
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "2d8c5119-d142-48e1-b1c1-21e1bc72b8a9",
+    "uuid": "e9e17102-1794-423e-855f-fe289f85c331",
+    "tool_use_result": {
+      "stdout": "diff --git a/src/components/CycleSelector.tsx b/src/components/CycleSelector.tsx\nindex 8b3dc49..7c33fef 100644\n--- a/src/components/CycleSelector.tsx\n+++ b/src/components/CycleSelector.tsx\n@@ -1,13 +1,13 @@\n-import { CycleType, CYCLE_LABELS } from '../types/timer';\n+import { CycleType, CYCLE_LABELS } from '../types/timer'\n \n-const CYCLE_TYPES: CycleType[] = ['work', 'shortBreak', 'longBreak'];\n+const CYCLE_TYPES: CycleType[] = ['work', 'shortBreak', 'longBreak']\n \n export default function CycleSelector({\n   currentCycle,\n   onSwitchCycle,\n }: {\n-  currentCycle: CycleType;\n-  onSwitchCycle: (cycle: CycleType) => void;\n+  currentCycle: CycleType\n+  onSwitchCycle: (cycle: CycleType) => void\n }) {\n   return (\n     <div className=\"flex items-center gap-2\">\n@@ -25,5 +25,5 @@ export default function CycleSelector({\n         </button>\n       ))}\n     </div>\n-  );\n+  )\n }\ndiff --git a/src/components/PomodoroTimer.tsx b/src/components/PomodoroTimer.tsx\nindex 9243db8..74a7b27 100644\n--- a/src/components/PomodoroTimer.tsx\n+++ b/src/components/PomodoroTimer.tsx\n@@ -1,11 +1,14 @@\n+import { useState, useCallback } from 'react'\n import { useTimer } from '../hooks/useTimer'\n import { useNotifications } from '../hooks/useNotifications'\n-import { CycleType } from '../types/timer'\n+import { useSessionHistory } from '../hooks/useSessionHistory'\n+import { CycleType, CYCLE_DURATIONS } from '../types/timer'\n import TimerDisplay from './TimerDisplay'\n import TimerControls from './TimerControls'\n import CycleSelector from './CycleSelector'\n import NotificationBanner from './NotificationBanner'\n import NotificationSettings from './NotificationSettings'\n+import StatisticsModal from './StatisticsModal'\n \n const CYCLE_COLORS: Record<CycleType, string> = {\n   work: 'from-rose-500 to-red-600',\n@@ -23,8 +26,19 @@ export default function PomodoroTimer() {\n     requestBrowserPermission,\n   } = useNotifications()\n \n+  const { recordSession, getStatistics, getDailyFocusData } = useSessionHistory()\n+  const [isStatsOpen, setIsStatsOpen] = useState(false)\n+\n+  const handleTimerComplete = useCallback(\n+    (cycleType: CycleType) => {\n+      triggerNotification(cycleType)\n+      recordSession(cycleType, CYCLE_DURATIONS[cycleType])\n+    },\n+    [triggerNotification, recordSession]\n+  )\n+\n   const { timeRemaining, isRunning, currentCycle, start, pause, reset, switchCycle } =\n-    useTimer(triggerNotification)\n+    useTimer(handleTimerComplete)\n \n   return (\n     <div\n@@ -42,6 +56,28 @@ export default function PomodoroTimer() {\n         onUpdateSettings={updateSettings}\n         onRequestPermission={requestBrowserPermission}\n       />\n+      <div className=\"fixed top-4 left-4 z-40\">\n+        <button\n+          onClick={() => setIsStatsOpen(true)}\n+          className=\"p-2.5 rounded-xl bg-white/20 hover:bg-white/30 active:scale-95 transition-all duration-200 text-white\"\n+          aria-label=\"Focus statistics\"\n+        >\n+          <svg\n+            xmlns=\"http://www.w3.org/2000/svg\"\n+            viewBox=\"0 0 24 24\"\n+            fill=\"currentColor\"\n+            className=\"w-5 h-5\"\n+          >\n+            <path d=\"M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z\" />\n+          </svg>\n+        </button>\n+      </div>\n+      <StatisticsModal\n+        isOpen={isStatsOpen}\n+        onClose={() => setIsStatsOpen(false)}\n+        getStatistics={getStatistics}\n+        getDailyFocusData={getDailyFocusData}\n+      />\n       <p className=\"text-white/70 text-sm font-medium tracking-widest uppercase mb-8\">\n         Pomodoro Timer\n       </p>\ndiff --git a/src/components/TimerControls.tsx b/src/components/TimerControls.tsx\nindex f8d4743..d1fd79a 100644\n--- a/src/components/TimerControls.tsx\n+++ b/src/components/TimerControls.tsx\n@@ -4,10 +4,10 @@ export default function TimerControls({\n   onPause,\n   onReset,\n }: {\n-  isRunning: boolean;\n-  onStart: () => void;\n-  onPause: () => void;\n-  onReset: () => void;\n+  isRunning: boolean\n+  onStart: () => void\n+  onPause: () => void\n+  onReset: () => void\n }) {\n   return (\n     <div className=\"flex items-center gap-4\">\n@@ -68,5 +68,5 @@ export default function TimerControls({\n         Reset\n       </button>\n     </div>\n-  );\n+  )\n }\ndiff --git a/src/components/TimerDisplay.tsx b/src/components/TimerDisplay.tsx\nindex 1eb888a..a2aaa00 100644\n--- a/src/components/TimerDisplay.tsx\n+++ b/src/components/TimerDisplay.tsx\n@@ -1,15 +1,15 @@\n function formatTime(seconds: number): string {\n-  const mins = Math.floor(seconds / 60);\n-  const secs = seconds % 60;\n-  return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;\n+  const mins = Math.floor(seconds / 60)\n+  const secs = seconds % 60\n+  return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`\n }\n \n export default function TimerDisplay({\n   timeRemaining,\n   isRunning,\n }: {\n-  timeRemaining: number;\n-  isRunning: boolean;\n+  timeRemaining: number\n+  isRunning: boolean\n }) {\n   return (\n     <div\n@@ -19,5 +19,5 @@ export default function TimerDisplay({\n     >\n       {formatTime(timeRemaining)}\n     </div>\n-  );\n+  )\n }\ndiff --git a/src/main.tsx b/src/main.tsx\nindex 3d7150d..c4fc9bb 100644\n--- a/src/main.tsx\n+++ b/src/main.tsx\n@@ -6,5 +6,5 @@ import './index.css'\n ReactDOM.createRoot(document.getElementById('root')!).render(\n   <React.StrictMode>\n     <App />\n-  </React.StrictMode>,\n+  </React.StrictMode>\n )\ndiff --git a/src/types/timer.ts b/src/types/timer.ts\nindex 7e78565..76347a8 100644\n--- a/src/types/timer.ts\n+++ b/src/types/timer.ts\n@@ -1,26 +1,26 @@\n-export type CycleType = 'work' | 'shortBreak' | 'longBreak';\n+export type CycleType = 'work' | 'shortBreak' | 'longBreak'\n \n export const CYCLE_DURATIONS: Record<CycleType, number> = {\n   work: 1500,\n   shortBreak: 300,\n   longBreak: 900,\n-};\n+}\n \n export const CYCLE_LABELS: Record<CycleType, string> = {\n   work: 'Work',\n   shortBreak: 'Short Break',\n   longBreak: 'Long Break',\n-};\n+}\n \n export interface TimerState {\n-  timeRemaining: number;\n-  isRunning: boolean;\n-  currentCycle: CycleType;\n+  timeRemaining: number\n+  isRunning: boolean\n+  currentCycle: CycleType\n }\n \n export interface TimerActions {\n-  start: () => void;\n-  pause: () => void;\n-  reset: () => void;\n-  switchCycle: (cycle: CycleType) => void;\n+  start: () => void\n+  pause: () => void\n+  reset: () => void\n+  switchCycle: (cycle: CycleType) => void\n }\ndiff --git a/tailwind.config.js b/tailwind.config.js\nindex 6d6808c..e30ebd1 100644\n--- a/tailwind.config.js\n+++ b/tailwind.config.js\n@@ -10,6 +10,8 @@ export default {\n         'pulse-slow': 'pulse-slow 2s ease-in-out infinite',\n         'notification-enter': 'notification-enter 0.3s ease-out',\n         'notification-exit': 'notification-exit 0.3s ease-in',\n+        'modal-enter': 'modal-enter 0.2s ease-out',\n+        'modal-backdrop-enter': 'modal-backdrop-enter 0.15s ease-out',\n       },\n       keyframes: {\n         'pulse-slow': {\n@@ -24,6 +26,14 @@ export default {\n           '0%': { opacity: '1', transform: 'translate(-50%, 0)' },\n           '100%': { opacity: '0', transform: 'translate(-50%, -100%)' },\n         },\n+        'modal-enter': {\n+          '0%': { opacity: '0', transform: 'scale(0.95)' },\n+          '100%': { opacity: '1', transform: 'scale(1)' },\n+        },\n+        'modal-backdrop-enter': {\n+          '0%': { opacity: '0' },\n+          '100%': { opacity: '1' },\n+        },\n       },\n     },\n   },\ndiff --git a/tsconfig.tsbuildinfo b/tsconfig.tsbuildinfo\nindex b318da4..f92382a 100644\n--- a/tsconfig.tsbuildinfo\n+++ b/tsconfig.tsbuildinfo\n@@ -1 +1 @@\n-{\"root\":[\"./src/app.tsx\",\"./src/main.tsx\",\"./src/vite-env.d.ts\",\"./src/components/cycleselector.tsx\",\"./src/components/pomodorotimer.tsx\",\"./src/components/timercontrols.tsx\",\"./src/components/timerdisplay.tsx\",\"./src/hooks/usetimer.ts\",\"./src/types/timer.ts\"],\"version\":\"5.9.3\"}\n\\ No newline at end of file\n+{\"root\":[\"./src/app.tsx\",\"./src/main.tsx\",\"./src/vite-env.d.ts\",\"./src/components/cycleselector.tsx\",\"./src/components/notificationbanner.tsx\",\"./src/components/notificationsettings.tsx\",\"./src/components/pomodorotimer.tsx\",\"./src/components/statisticschart.tsx\",\"./src/components/statisticsmodal.tsx\",\"./src/components/timercontrols.tsx\",\"./src/components/timerdisplay.tsx\",\"./src/hooks/usenotifications.ts\",\"./src/hooks/usesessionhistory.ts\",\"./src/hooks/usetimer.ts\",\"./src/types/notifications.ts\",\"./src/types/statistics.ts\",\"./src/types/timer.ts\",\"./src/utils/audio.ts\"],\"version\":\"5.9.3\"}\n\\ No newline at end of file\r\nwarning: in the working copy of 'src/App.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/CycleSelector.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/NotificationBanner.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/NotificationSettings.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/PomodoroTimer.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/TimerControls.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/TimerDisplay.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/hooks/useNotifications.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/hooks/useTimer.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/index.css', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/main.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/types/notifications.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/types/timer.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/utils/audio.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/vite-env.d.ts', LF will be replaced by CRLF the next time Git touches it\r",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-sonnet-4-5-20250929",
+      "id": "msg_01HF3EB3SL33stuU9ceeBGqw",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Now let me stage all changes and create the commit:"
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4137,
+        "cache_read_input_tokens": 20706,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 4137,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 1,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "2d8c5119-d142-48e1-b1c1-21e1bc72b8a9",
+    "uuid": "7f69d0a5-11f9-40c1-a1e4-17db700a4500"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-sonnet-4-5-20250929",
+      "id": "msg_01HF3EB3SL33stuU9ceeBGqw",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01Lzmtt2xdBNTkTfNWbSG6qG",
+          "name": "Bash",
+          "input": {
+            "command": "git add -A && git commit -m \"$(cat <<'EOF'\nsdlc_implementor: feature: add focus statistics tracking\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\"",
+            "description": "Stage all changes and create commit"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4137,
+        "cache_read_input_tokens": 20706,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 4137,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 1,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "2d8c5119-d142-48e1-b1c1-21e1bc72b8a9",
+    "uuid": "f54889a2-b322-4a1a-a56e-c5eb37bebb83"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01Lzmtt2xdBNTkTfNWbSG6qG",
+          "type": "tool_result",
+          "content": "[feature-issue-5-adw-af87dd64-focus-statistics-tracking 6a91b11] sdlc_implementor: feature: add focus statistics tracking\n 21 files changed, 9292 insertions(+), 30 deletions(-)\n create mode 100644 .claude/commands/e2e/test_focus_statistics.md\n create mode 100644 agents/af87dd64/pr_creator/prompts/pull_request.txt\n create mode 100644 agents/af87dd64/pr_creator/raw_output.json\n create mode 100644 agents/af87dd64/pr_creator/raw_output.jsonl\n create mode 100644 agents/af87dd64/sdlc_implementor/prompts/implement.txt\n create mode 100644 agents/af87dd64/sdlc_implementor/raw_output.json\n create mode 100644 agents/af87dd64/sdlc_implementor/raw_output.jsonl\n create mode 100644 agents/af87dd64/sdlc_implementor_committer/prompts/commit.txt\n create mode 100644 agents/af87dd64/sdlc_implementor_committer/raw_output.jsonl\n create mode 100644 src/components/StatisticsChart.tsx\n create mode 100644 src/components/StatisticsModal.tsx\n create mode 100644 src/hooks/useSessionHistory.ts\n create mode 100644 src/types/statistics.ts\r\nwarning: in the working copy of 'src/App.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/CycleSelector.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/NotificationBanner.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/NotificationSettings.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/PomodoroTimer.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/TimerControls.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/TimerDisplay.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/hooks/useNotifications.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/hooks/useTimer.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/index.css', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/main.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/types/notifications.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/types/timer.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/utils/audio.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/vite-env.d.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'agents/af87dd64/pr_creator/raw_output.jsonl', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'agents/af87dd64/sdlc_implementor/raw_output.jsonl', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'agents/af87dd64/sdlc_implementor_committer/raw_output.jsonl', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/StatisticsChart.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/StatisticsModal.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/hooks/useSessionHistory.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/types/statistics.ts', LF will be replaced by CRLF the next time Git touches it",
+          "is_error": false
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "2d8c5119-d142-48e1-b1c1-21e1bc72b8a9",
+    "uuid": "f6eea58b-b772-4477-af7e-ac32b9cad3c1",
+    "tool_use_result": {
+      "stdout": "[feature-issue-5-adw-af87dd64-focus-statistics-tracking 6a91b11] sdlc_implementor: feature: add focus statistics tracking\n 21 files changed, 9292 insertions(+), 30 deletions(-)\n create mode 100644 .claude/commands/e2e/test_focus_statistics.md\n create mode 100644 agents/af87dd64/pr_creator/prompts/pull_request.txt\n create mode 100644 agents/af87dd64/pr_creator/raw_output.json\n create mode 100644 agents/af87dd64/pr_creator/raw_output.jsonl\n create mode 100644 agents/af87dd64/sdlc_implementor/prompts/implement.txt\n create mode 100644 agents/af87dd64/sdlc_implementor/raw_output.json\n create mode 100644 agents/af87dd64/sdlc_implementor/raw_output.jsonl\n create mode 100644 agents/af87dd64/sdlc_implementor_committer/prompts/commit.txt\n create mode 100644 agents/af87dd64/sdlc_implementor_committer/raw_output.jsonl\n create mode 100644 src/components/StatisticsChart.tsx\n create mode 100644 src/components/StatisticsModal.tsx\n create mode 100644 src/hooks/useSessionHistory.ts\n create mode 100644 src/types/statistics.ts\r\nwarning: in the working copy of 'src/App.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/CycleSelector.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/NotificationBanner.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/NotificationSettings.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/PomodoroTimer.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/TimerControls.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/TimerDisplay.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/hooks/useNotifications.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/hooks/useTimer.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/index.css', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/main.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/types/notifications.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/types/timer.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/utils/audio.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/vite-env.d.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'agents/af87dd64/pr_creator/raw_output.jsonl', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'agents/af87dd64/sdlc_implementor/raw_output.jsonl', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'agents/af87dd64/sdlc_implementor_committer/raw_output.jsonl', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/StatisticsChart.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/components/StatisticsModal.tsx', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/hooks/useSessionHistory.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/types/statistics.ts', LF will be replaced by CRLF the next time Git touches it\r",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-sonnet-4-5-20250929",
+      "id": "msg_0153kMvweeFsQSKe7k9ucvhD",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "sdlc_implementor: feature: add focus statistics tracking"
+        }
+      ],
+      "stop_reason": null,
+      "stop_sequence": null,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 1345,
+        "cache_read_input_tokens": 24843,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 1345,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 1,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "2d8c5119-d142-48e1-b1c1-21e1bc72b8a9",
+    "uuid": "1b79e845-7dc2-490e-ab6b-7f6ccae90693"
+  },
+  {
+    "type": "result",
+    "subtype": "success",
+    "is_error": false,
+    "duration_ms": 13994,
+    "duration_api_ms": 15755,
+    "num_turns": 3,
+    "result": "sdlc_implementor: feature: add focus statistics tracking",
+    "stop_reason": null,
+    "session_id": "2d8c5119-d142-48e1-b1c1-21e1bc72b8a9",
+    "total_cost_usd": 0.12527875,
+    "usage": {
+      "input_tokens": 15,
+      "cache_creation_input_tokens": 12571,
+      "cache_read_input_tokens": 59166,
+      "output_tokens": 262,
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 12571
+      },
+      "inference_geo": "",
+      "iterations": [],
+      "speed": "standard"
+    },
+    "modelUsage": {
+      "claude-sonnet-4-5-20250929": {
+        "inputTokens": 15,
+        "outputTokens": 262,
+        "cacheReadInputTokens": 59166,
+        "cacheCreationInputTokens": 12571,
+        "webSearchRequests": 0,
+        "costUSD": 0.11477674999999998,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000
+      },
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 4292,
+        "outputTokens": 158,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 4336,
+        "webSearchRequests": 0,
+        "costUSD": 0.010502,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000
+      }
+    },
+    "permission_denials": [],
+    "uuid": "8bbffada-33ca-4ed0-8fa8-287af3ea2614"
+  }
+]
