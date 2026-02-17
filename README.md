@@ -2,20 +2,62 @@
 
 A modern Pomodoro timer application built entirely using AI agents following the **plan → build → test** workflow.
 
-🔗 **Live Demo**: [To be deployed on Vercel]
+
+
 
 ## 🎯 Project Overview
 
 This project is part of the **Agentic AI Challenge**, demonstrating how AI agents can autonomously handle the entire software development lifecycle - from planning to implementation to deployment.
 
-### Key Features (To Be Implemented)
-- ⏱️ Configurable Pomodoro timer (work/break intervals)
+**Current Status**: 5 major features implemented | Production-ready
+
+The application is a fully functional Pomodoro timer with advanced features including customizable timer durations, multiple themes, focus statistics tracking, and comprehensive notification system. All features were implemented through an AI-driven workflow using GitHub issues, automated planning, and Claude Code CLI.
+
+### Key Features
+- ⏱️ Configurable Pomodoro timer with work/short break/long break cycles
 - ⏯️ Start, pause, and reset functionality
-- 🔔 Audio/visual notifications when timer completes
-- 📊 Session tracking and statistics
-- 🎨 Dark mode toggle
-- 💾 LocalStorage persistence
-- 📱 Responsive design
+- 🔔 Audio and visual notifications with browser notification support
+- 📊 Session tracking with focus statistics and daily charts
+- 🎨 Theme customization (Dark, Light, Ocean)
+- ⚙️ Customizable timer durations for work and break periods
+- 💾 LocalStorage persistence for all settings and session history
+- 📱 Responsive design with smooth animations
+
+### Feature Details
+
+**Pomodoro Timer**
+- Three cycle types: Work (default 25min), Short Break (5min), Long Break (15min)
+- Animated circular progress indicator
+- Easy cycle switching during sessions
+- Automatic progression through cycles
+
+**Notifications**
+- Visual notification banners with cycle-specific messages
+- Browser notifications with permission handling
+- Audio notifications with multiple sound options
+- Customizable notification preferences per notification type
+- Settings panel for granular control
+
+**Focus Statistics**
+- Track all completed sessions (work, short break, long break)
+- View total focus time, session counts, and averages
+- Daily focus chart showing work sessions over time
+- Statistics modal with comprehensive metrics
+- Historical data preserved across sessions
+
+**Theme System**
+- Three built-in themes optimized for different environments
+- Smooth transitions between themes
+- Cycle-specific gradient backgrounds
+- Consistent design system with CSS custom properties
+- Theme preference persisted automatically
+
+**Timer Customization**
+- Adjust work session duration (1-60 minutes)
+- Adjust short break duration (1-30 minutes)
+- Adjust long break duration (1-60 minutes)
+- Settings integrated in notification panel
+- Changes take effect on next timer start
 
 ### Tech Stack
 - **Frontend**: React 18 + TypeScript + Vite
@@ -96,6 +138,16 @@ Use these slash commands in Claude Code:
 - `/test` - Run validation suite (TypeScript, ESLint, build)
 - `/review <adw-id> <spec-path>` - Review implementation against spec
 
+**E2E Testing:**
+- `/e2e:test_pomodoro_timer` - Test core timer functionality
+- `/e2e:test_notifications` - Test audio and visual notifications
+- `/e2e:test_focus_statistics` - Test statistics and session tracking
+- `/e2e:test_theme_customization` - Test theme switching
+- `/e2e:test_task_management` - Test task management features
+- `/e2e:test_task_categories` - Test task categorization
+- `/e2e:test_task_filtering` - Test task filtering
+- `/e2e:test_dark_mode` - Test dark mode toggle
+
 **Git Operations:**
 - `/commit` - Create a git commit with proper message
 - `/pull_request` - Create a pull request
@@ -157,197 +209,53 @@ npm run build
 
 # Preview production build
 npm run preview
+
+# Lint code
+npm run lint
+
+# Format code
+npm run format
 ```
 
 Visit [http://localhost:5173](http://localhost:5173)
+
 
 ## 🛠️ Using ADWs
 
 ### Process a GitHub Issue
 
+The ADW system automates the entire development workflow from issue to pull request.
+
+**Setup Environment Variables**:
+
 ```bash
 cd adws/
 
-# Set environment variables (Windows PowerShell)
-$env:GITHUB_REPO_URL="YOUR_REPO_URL"
+# Windows PowerShell
+$env:GITHUB_REPO_URL="https://github.com/YOUR_USERNAME/pomodoro-challenge"
 $env:ANTHROPIC_API_KEY="your-api-key"
 
-# Or on Windows CMD
-set GITHUB_REPO_URL=YOUR_REPO_URL
+# Windows CMD
+set GITHUB_REPO_URL=https://github.com/YOUR_USERNAME/pomodoro-challenge
 set ANTHROPIC_API_KEY=your-api-key
 
-# Process an issue (plan + build)
-uv run adw_plan_build.py <issue-number>
-
-# Or run phases separately
-uv run adw_plan.py <issue-number>  # Planning only
-uv run adw_build.py <issue-number> <adw-id>  # Build only
+# macOS/Linux
+export GITHUB_REPO_URL="https://github.com/YOUR_USERNAME/pomodoro-challenge"
+export ANTHROPIC_API_KEY="your-api-key"
 ```
 
-### Example Workflow
-
-1. Create issue #1: "Add basic Pomodoro timer functionality"
-2. Run: `uv run adw_plan_build.py 1`
-3. ADW will:
-   - Analyze the issue
-   - Generate implementation plan in `specs/`
-   - Create feature branch
-   - Implement the code
-   - Create pull request
-4. Review and merge the PR
-5. Repeat for next issue!
-
-## 📋 Planned Issues
-
-Here are the issues to implement sequentially:
-
-### Issue #1: Initial Project Setup ✅
-**Type**: `/chore`
-```markdown
-Setup base project with Vite + React + TypeScript
-
-- Initialize Vite project ✅ (completed)
-- Configure TypeScript strict mode ✅
-- Add Tailwind CSS for styling ✅
-- Setup basic folder structure ✅
-- Create base App component ✅
-```
-
-### Issue #2: Core Pomodoro Timer
-**Type**: `/feature`
-```markdown
-Implement core Pomodoro timer functionality
-
-- Create timer component with countdown display
-- Add configurable work/break durations (default: 25/5 minutes)
-- Implement start, pause, and reset controls
-- Add visual progress indicator
-- Persist timer state in localStorage
-```
-
-### Issue #3: Timer Notifications
-**Type**: `/feature`
-```markdown
-Add notifications when timer completes
-
-- Browser notification support
-- Audio notification option
-- Visual alerts when session ends
-- Notification preferences in settings
-```
-
-### Issue #4: Session Tracking
-**Type**: `/feature`
-```markdown
-Track and display Pomodoro sessions
-
-- Count completed sessions
-- Display session history
-- Show daily/weekly statistics
-- Export session data
-```
-
-### Issue #5: Customization & Settings
-**Type**: `/feature`
-```markdown
-Add user customization options
-
-- Customize work/break durations
-- Choose notification sounds
-- Configure auto-start behavior
-- Theme preferences
-```
-
-### Issue #6: Dark Mode
-**Type**: `/feature`
-```markdown
-Implement dark mode toggle
-
-- Add theme context
-- Create toggle button
-- Update all styles for dark theme
-- Persist preference in localStorage
-```
-
-### Issue #7: Deployment
-**Type**: `/chore`
-```markdown
-Deploy to Vercel
-
-- Connect GitHub repo to Vercel
-- Configure build settings
-- Test production deployment
-- Add deployment URL to README
-```
-
-## 📁 Project Structure
-
-```
-pomodoro-challenge/
-├── .claude/              # Claude Code configuration
-│   ├── commands/         # Custom slash commands
-│   └── hooks/           # Git hooks
-├── adws/                # AI Developer Workflows
-│   ├── adw_modules/     # Core modules
-│   └── *.py            # Workflow scripts
-├── specs/               # Implementation plans
-├── src/                 # React application
-│   ├── components/      # React components
-│   ├── hooks/          # Custom hooks
-│   ├── utils/          # Utility functions
-│   └── types/          # TypeScript types
-├── public/             # Static assets
-└── dist/               # Build output
-```
-
-## 🎓 Challenge Requirements
-
-This project fulfills the **Agentic AI Challenge** requirements:
-
-✅ **Development based on Issues**
-- All features implemented via GitHub issues
-- Each issue processed by ADWs
-- Commit history shows agent-driven development
-
-✅ **Demonstrable Agentic Layer**
-- `.claude/commands/` - Custom slash commands
-- `adws/` - AI Developer Workflows
-- `specs/` - Generated implementation plans
-
-✅ **Vercel Deployment**
-- Configured for Vercel deployment
-- Production-ready build
-- Publicly accessible
-
-## 📧 Submission
-
-**Email to**: agentic.challenge@patagonian.com
-
-**Subject**: Agentic AI Challenge - Pomodoro Timer
-
-**Content**:
-- GitHub Repository URL: `YOUR_REPO_URL`
-- Vercel URL: `YOUR_VERCEL_URL`
-- GitHub Issue demonstrating ADW workflow
-
-## 🔒 Environment Variables
-
-Create a `.env` file in the `adws/` directory (see `.env.sample`):
+**Run the ADW Workflow**:
 
 ```bash
-GITHUB_REPO_URL=YOUR_REPO_URL
-GITHUB_PAT=your_github_token
-ANTHROPIC_API_KEY=your_anthropic_key
+# Complete workflow (recommended): plan + build + PR
+uv run adw_plan_build.py <issue-number>
+
+# Separate phases:
+uv run adw_plan.py <issue-number>              # 1. Planning only
+uv run adw_build.py <issue-number> <adw-id>    # 2. Build only (after planning)
 ```
 
-## 📝 License
 
-MIT License - Feel free to use this as a template for your own agentic projects!
 
-## 🙏 Acknowledgments
 
-Built with [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) and the AI Developer Workflow pattern learned in the TAC Agentic Coding course.
-
----
-
-**Note**: This project demonstrates AI-driven development. Each feature is implemented by AI agents following the plan → build → test workflow, with human oversight for quality control.
+**Note**: This project demonstrates AI-driven development where each feature was implemented by AI agents following the **plan → build → test workflow**, with human oversight for quality control. The commit history, implementation plans, and pull requests provide full transparency into the agentic development process.
