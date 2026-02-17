@@ -32,7 +32,9 @@ export default function StatisticsChart({
   if (allZero) {
     return (
       <div className="h-40 flex items-center justify-center">
-        <p className="text-white/50 text-sm">No focus sessions recorded</p>
+        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          No focus sessions recorded
+        </p>
       </div>
     )
   }
@@ -45,8 +47,18 @@ export default function StatisticsChart({
           return (
             <div key={d.date} className="flex-1 flex flex-col justify-end h-full min-w-[4px]">
               <div
-                className="bg-white/50 hover:bg-white/70 rounded-t transition-all duration-200 w-full"
-                style={{ height: `${heightPercent}%`, minHeight: d.focusMinutes > 0 ? '2px' : '0' }}
+                className="rounded-t transition-all duration-200 w-full"
+                style={{
+                  height: `${heightPercent}%`,
+                  minHeight: d.focusMinutes > 0 ? '2px' : '0',
+                  background: 'var(--color-chart-bar)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'var(--color-chart-bar-hover)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'var(--color-chart-bar)'
+                }}
                 title={`${Math.round(d.focusMinutes)} min`}
               />
             </div>
@@ -58,7 +70,14 @@ export default function StatisticsChart({
           const label = getDayLabel(d.date, index, period)
           return (
             <div key={d.date} className="flex-1 min-w-[4px] text-center">
-              {label && <span className="text-[9px] text-white/50 leading-none">{label}</span>}
+              {label && (
+                <span
+                  className="text-[9px] leading-none"
+                  style={{ color: 'var(--color-text-muted)' }}
+                >
+                  {label}
+                </span>
+              )}
             </div>
           )
         })}

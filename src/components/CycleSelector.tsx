@@ -15,11 +15,16 @@ export default function CycleSelector({
         <button
           key={cycle}
           onClick={() => onSwitchCycle(cycle)}
-          className={`rounded-full px-4 py-2 text-white text-sm transition-all duration-200 ${
-            cycle === currentCycle
-              ? 'bg-white/30 font-semibold shadow-lg'
-              : 'bg-white/10 hover:bg-white/20'
-          }`}
+          className="rounded-full px-4 py-2 text-sm transition-all duration-200"
+          style={{
+            background:
+              cycle === currentCycle
+                ? 'var(--color-bg-surface-active)'
+                : 'var(--color-bg-secondary)',
+            color: 'var(--color-text-primary)',
+            fontWeight: cycle === currentCycle ? 600 : 400,
+            boxShadow: cycle === currentCycle ? '0 10px 15px -3px rgba(0,0,0,0.1)' : 'none',
+          }}
         >
           {CYCLE_LABELS[cycle]}
         </button>
