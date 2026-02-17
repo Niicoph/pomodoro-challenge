@@ -145,6 +145,24 @@ def main():
     # Get the plan file from state
     plan_file = state.get("plan_file")
     logger.info(f"Using plan file: {plan_file}")
+
+    # Convert to absolute path if relative (to handle working directory issues)
+    if not os.path.isabs(plan_file):
+        # Get the project root (parent of adws directory)
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        abs_plan_file = os.path.join(project_root, plan_file)
+    else:
+        abs_plan_file = plan_file
+
+    # Verify the plan file exists
+    if not os.path.exists(abs_plan_file):
+        error_msg = f"Plan file does not exist: {abs_plan_file}"
+        logger.error(error_msg)
+        make_issue_comment(
+            issue_number,
+            format_issue_message(adw_id, "ops", f"❌ {error_msg}")
+        )
+        sys.exit(1)
     
     make_issue_comment(
         issue_number, 

@@ -198,7 +198,7 @@ def main():
     # Get the plan file path directly from response
     logger.info("Getting plan file path")
     plan_file_path = plan_response.output.strip().strip('`')
-    
+
     # Validate the path exists
     if not plan_file_path:
         error = "No plan file path returned from planning agent"
@@ -208,15 +208,31 @@ def main():
             format_issue_message(adw_id, "ops", f"❌ {error}"),
         )
         sys.exit(1)
-    
-    if not os.path.exists(plan_file_path):
-        error = f"Plan file does not exist: {plan_file_path}"
+
+    # Convert to absolute path if relative (to handle working directory issues)
+    if not os.path.isabs(plan_file_path):
+        # Get the project root (parent of adws directory)
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        abs_plan_file_path = os.path.join(project_root, plan_file_path)
+    else:
+        abs_plan_file_path = plan_file_path
+
+    if not os.path.exists(abs_plan_file_path):
+        error = f"Plan file does not exist: {abs_plan_file_path} (returned path: {plan_file_path})"
         logger.error(error)
-        make_issue_comment(
-            issue_number,
-            format_issue_message(adw_id, "ops", f"❌ {error}"),
-        )
-        sys.exit(1)
+        # Wait a moment and retry once (file system sync delay)
+        import time
+        time.sleep(0.5)
+        if not os.path.exists(abs_plan_file_path):
+            make_issue_comment(
+                issue_number,
+                format_issue_message(adw_id, "ops", f"❌ {error}"),
+            )
+            sys.exit(1)
+        logger.info("Plan file found after retry")
+
+    # Use the relative path for storage (more portable)
+    plan_file_path = plan_file_path
 
     state.update(plan_file=plan_file_path)
     state.save("adw_plan")
