@@ -13,7 +13,11 @@ export default function TimerControls({
     <div className="flex items-center gap-4">
       <button
         onClick={isRunning ? onPause : onStart}
-        className="flex items-center gap-2 bg-white/20 hover:bg-white/30 active:scale-95 transition-all duration-200 rounded-xl px-6 py-3 text-white font-semibold"
+        className="flex items-center gap-2 active:scale-95 transition-all duration-200 rounded-xl px-6 py-3 font-semibold"
+        style={{
+          background: 'var(--color-bg-surface)',
+          color: 'var(--color-text-primary)',
+        }}
       >
         {isRunning ? (
           <>
@@ -51,7 +55,11 @@ export default function TimerControls({
       </button>
       <button
         onClick={onReset}
-        className="flex items-center gap-2 bg-white/20 hover:bg-white/30 active:scale-95 transition-all duration-200 rounded-xl px-6 py-3 text-white font-semibold"
+        className="flex items-center gap-2 active:scale-95 transition-all duration-200 rounded-xl px-6 py-3 font-semibold"
+        style={{
+          background: 'var(--color-bg-surface)',
+          color: 'var(--color-text-primary)',
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

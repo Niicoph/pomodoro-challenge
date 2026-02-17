@@ -13,9 +13,10 @@ export default function TimerDisplay({
 }) {
   return (
     <div
-      className={`text-8xl sm:text-9xl font-mono font-bold tracking-tight text-white ${
+      className={`text-8xl sm:text-9xl font-mono font-bold tracking-tight ${
         isRunning ? 'animate-pulse-slow' : ''
       }`}
+      style={{ color: 'var(--color-text-primary)' }}
     >
       {formatTime(timeRemaining)}
     </div>

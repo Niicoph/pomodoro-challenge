@@ -37,15 +37,19 @@ export default function StatisticsModal({
     >
       <div className="absolute inset-0 bg-black/50" />
       <div
-        className="relative w-full max-w-[480px] bg-white/20 backdrop-blur-lg rounded-2xl shadow-2xl p-6 animate-modal-enter"
+        className="relative w-full max-w-[480px] backdrop-blur-lg rounded-2xl shadow-2xl p-6 animate-modal-enter"
+        style={{ background: 'var(--color-bg-surface)' }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-semibold text-white">Focus Statistics</h2>
+          <h2 className="text-lg font-semibold" style={{ color: 'var(--color-text-primary)' }}>
+            Focus Statistics
+          </h2>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg hover:bg-white/20 transition-colors text-white"
+            className="p-1 rounded-lg transition-colors"
+            style={{ color: 'var(--color-text-primary)' }}
             aria-label="Close statistics"
           >
             <svg
@@ -65,11 +69,16 @@ export default function StatisticsModal({
             <button
               key={period}
               onClick={() => setSelectedPeriod(period)}
-              className={`rounded-full px-4 py-2 text-white text-sm transition-all duration-200 ${
-                selectedPeriod === period
-                  ? 'bg-white/30 font-semibold shadow-lg'
-                  : 'bg-white/10 hover:bg-white/20'
-              }`}
+              className="rounded-full px-4 py-2 text-sm transition-all duration-200"
+              style={{
+                background:
+                  selectedPeriod === period
+                    ? 'var(--color-bg-surface-active)'
+                    : 'var(--color-bg-secondary)',
+                color: 'var(--color-text-primary)',
+                fontWeight: selectedPeriod === period ? 600 : 400,
+                boxShadow: selectedPeriod === period ? '0 10px 15px -3px rgba(0,0,0,0.1)' : 'none',
+              }}
             >
               {PERIOD_LABELS[period]}
             </button>
@@ -78,21 +87,38 @@ export default function StatisticsModal({
 
         {/* Metric Cards */}
         <div className="grid grid-cols-3 gap-3 mb-5">
-          <div className="bg-white/10 rounded-xl p-4 text-center">
-            <div className="text-2xl font-bold text-white">
+          <div
+            className="rounded-xl p-4 text-center"
+            style={{ background: 'var(--color-bg-secondary)' }}
+          >
+            <div className="text-2xl font-bold" style={{ color: 'var(--color-text-primary)' }}>
               {formatMinutesToDisplay(stats.totalFocusMinutes)}
             </div>
-            <div className="text-xs text-white/70 mt-1">Focus Time</div>
+            <div className="text-xs mt-1" style={{ color: 'var(--color-text-secondary)' }}>
+              Focus Time
+            </div>
           </div>
-          <div className="bg-white/10 rounded-xl p-4 text-center">
-            <div className="text-2xl font-bold text-white">{stats.focusSessions}</div>
-            <div className="text-xs text-white/70 mt-1">Sessions</div>
+          <div
+            className="rounded-xl p-4 text-center"
+            style={{ background: 'var(--color-bg-secondary)' }}
+          >
+            <div className="text-2xl font-bold" style={{ color: 'var(--color-text-primary)' }}>
+              {stats.focusSessions}
+            </div>
+            <div className="text-xs mt-1" style={{ color: 'var(--color-text-secondary)' }}>
+              Sessions
+            </div>
           </div>
-          <div className="bg-white/10 rounded-xl p-4 text-center">
-            <div className="text-2xl font-bold text-white">
+          <div
+            className="rounded-xl p-4 text-center"
+            style={{ background: 'var(--color-bg-secondary)' }}
+          >
+            <div className="text-2xl font-bold" style={{ color: 'var(--color-text-primary)' }}>
               {formatMinutesToDisplay(stats.totalBreakMinutes)}
             </div>
-            <div className="text-xs text-white/70 mt-1">Break Time</div>
+            <div className="text-xs mt-1" style={{ color: 'var(--color-text-secondary)' }}>
+              Break Time
+            </div>
           </div>
         </div>
 

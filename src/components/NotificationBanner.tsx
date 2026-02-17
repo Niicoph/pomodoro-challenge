@@ -1,9 +1,9 @@
 import { CycleType } from '../types/timer'
 
-const CYCLE_BG: Record<CycleType, string> = {
-  work: 'bg-rose-600/90',
-  shortBreak: 'bg-emerald-600/90',
-  longBreak: 'bg-sky-600/90',
+const CYCLE_NOTIFICATION_VAR: Record<CycleType, string> = {
+  work: 'var(--color-notification-work)',
+  shortBreak: 'var(--color-notification-short-break)',
+  longBreak: 'var(--color-notification-long-break)',
 }
 
 export default function NotificationBanner({
@@ -25,16 +25,23 @@ export default function NotificationBanner({
     <div
       role="alert"
       aria-live="polite"
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md ${CYCLE_BG[cycleType]} backdrop-blur rounded-xl shadow-2xl px-5 py-4 text-white animate-notification-enter`}
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md backdrop-blur rounded-xl shadow-2xl px-5 py-4 animate-notification-enter"
+      style={{
+        background: CYCLE_NOTIFICATION_VAR[cycleType],
+        color: 'var(--color-text-primary)',
+      }}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-sm">{message}</p>
-          <p className="text-white/80 text-xs mt-1">{suggestion}</p>
+          <p className="text-xs mt-1" style={{ color: 'var(--color-text-secondary)' }}>
+            {suggestion}
+          </p>
         </div>
         <button
           onClick={onDismiss}
-          className="shrink-0 p-1 rounded-lg hover:bg-white/20 transition-colors"
+          className="shrink-0 p-1 rounded-lg transition-colors"
+          style={{ color: 'var(--color-text-primary)' }}
           aria-label="Dismiss notification"
         >
           <svg

@@ -7,9 +7,10 @@ function Toggle({ enabled, onToggle }: { enabled: boolean; onToggle: () => void 
       role="switch"
       aria-checked={enabled}
       onClick={onToggle}
-      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors duration-200 ${
-        enabled ? 'bg-white/40' : 'bg-white/15'
-      }`}
+      className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors duration-200"
+      style={{
+        background: enabled ? 'var(--color-toggle-on)' : 'var(--color-toggle-off)',
+      }}
     >
       <span
         className={`pointer-events-none inline-block h-5 w-5 translate-y-0.5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
@@ -48,7 +49,11 @@ export default function NotificationSettings({
     <div className="fixed top-4 right-4 z-40">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2.5 rounded-xl bg-white/20 hover:bg-white/30 active:scale-95 transition-all duration-200 text-white"
+        className="p-2.5 rounded-xl active:scale-95 transition-all duration-200"
+        style={{
+          background: 'var(--color-bg-surface)',
+          color: 'var(--color-text-primary)',
+        }}
         aria-label="Notification settings"
       >
         <svg
@@ -66,7 +71,13 @@ export default function NotificationSettings({
       </button>
 
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-64 bg-white/20 backdrop-blur-lg rounded-xl shadow-2xl p-4 text-white">
+        <div
+          className="absolute top-full right-0 mt-2 w-64 backdrop-blur-lg rounded-xl shadow-2xl p-4"
+          style={{
+            background: 'var(--color-bg-surface)',
+            color: 'var(--color-text-primary)',
+          }}
+        >
           <h3 className="text-sm font-semibold mb-3">Notifications</h3>
 
           <div className="space-y-3">
