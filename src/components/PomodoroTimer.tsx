@@ -1,9 +1,10 @@
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react'
 import { useTimer } from '../hooks/useTimer'
 import { useNotifications } from '../hooks/useNotifications'
 import { useSessionHistory } from '../hooks/useSessionHistory'
 import { useTheme } from '../hooks/useTheme'
-import { CycleType, CYCLE_DURATIONS } from '../types/timer'
+import { useTimerSettings } from '../hooks/useTimerSettings'
+import { CycleType, settingsToDurations } from '../types/timer'
 import { THEMES } from '../types/theme'
 import TimerDisplay from './TimerDisplay'
 import TimerControls from './TimerControls'
@@ -38,6 +39,8 @@ export default function PomodoroTimer() {
   } = useNotifications()
 
   const { recordSession, getStatistics, getDailyFocusData } = useSessionHistory()
+  const { timerSettings, updateTimerSettings } = useTimerSettings()
+  const customDurations = useMemo(() => settingsToDurations(timerSettings), [timerSettings])
   const [isStatsOpen, setIsStatsOpen] = useState(false)
   const [isThemeOpen, setIsThemeOpen] = useState(false)
   const { themeName, setTheme } = useTheme()
@@ -46,13 +49,13 @@ export default function PomodoroTimer() {
   const handleTimerComplete = useCallback(
     (cycleType: CycleType) => {
       triggerNotification(cycleType)
-      recordSession(cycleType, CYCLE_DURATIONS[cycleType])
+      recordSession(cycleType, customDurations[cycleType])
     },
-    [triggerNotification, recordSession]
+    [triggerNotification, recordSession, customDurations]
   )
 
   const { timeRemaining, isRunning, currentCycle, start, pause, reset, switchCycle } =
-    useTimer(handleTimerComplete)
+    useTimer(handleTimerComplete, customDurations)
 
   useEffect(() => {
     if (!isThemeOpen) return
@@ -81,6 +84,8 @@ export default function PomodoroTimer() {
         settings={settings}
         onUpdateSettings={updateSettings}
         onRequestPermission={requestBrowserPermission}
+        timerSettings={timerSettings}
+        onUpdateTimerSettings={updateTimerSettings}
       />
       <div className="fixed top-4 left-4 z-40 flex gap-2">
         <button

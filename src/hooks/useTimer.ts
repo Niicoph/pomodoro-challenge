@@ -1,8 +1,12 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { CycleType, CYCLE_DURATIONS, TimerState, TimerActions } from '../types/timer'
 
-export function useTimer(onComplete?: (cycleType: CycleType) => void): TimerState & TimerActions {
-  const [timeRemaining, setTimeRemaining] = useState(CYCLE_DURATIONS.work)
+export function useTimer(
+  onComplete?: (cycleType: CycleType) => void,
+  durations?: Record<CycleType, number>
+): TimerState & TimerActions {
+  const resolvedDurations = durations ?? CYCLE_DURATIONS
+  const [timeRemaining, setTimeRemaining] = useState(resolvedDurations.work)
   const [isRunning, setIsRunning] = useState(false)
   const [currentCycle, setCurrentCycle] = useState<CycleType>('work')
   const intervalRef = useRef<number | null>(null)
@@ -46,14 +50,14 @@ export function useTimer(onComplete?: (cycleType: CycleType) => void): TimerStat
 
   const reset = useCallback(() => {
     setIsRunning(false)
-    setTimeRemaining(CYCLE_DURATIONS[currentCycle])
-  }, [currentCycle])
+    setTimeRemaining(resolvedDurations[currentCycle])
+  }, [currentCycle, resolvedDurations])
 
   const switchCycle = useCallback((cycle: CycleType) => {
     setIsRunning(false)
     setCurrentCycle(cycle)
-    setTimeRemaining(CYCLE_DURATIONS[cycle])
-  }, [])
+    setTimeRemaining(resolvedDurations[cycle])
+  }, [resolvedDurations])
 
   return {
     timeRemaining,
