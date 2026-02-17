@@ -4,10 +4,10 @@ export default function TimerControls({
   onPause,
   onReset,
 }: {
-  isRunning: boolean;
-  onStart: () => void;
-  onPause: () => void;
-  onReset: () => void;
+  isRunning: boolean
+  onStart: () => void
+  onPause: () => void
+  onReset: () => void
 }) {
   return (
     <div className="flex items-center gap-4">
@@ -68,5 +68,5 @@ export default function TimerControls({
         Reset
       </button>
     </div>
-  );
+  )
 }

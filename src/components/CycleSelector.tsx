@@ -1,13 +1,13 @@
-import { CycleType, CYCLE_LABELS } from '../types/timer';
+import { CycleType, CYCLE_LABELS } from '../types/timer'
 
-const CYCLE_TYPES: CycleType[] = ['work', 'shortBreak', 'longBreak'];
+const CYCLE_TYPES: CycleType[] = ['work', 'shortBreak', 'longBreak']
 
 export default function CycleSelector({
   currentCycle,
   onSwitchCycle,
 }: {
-  currentCycle: CycleType;
-  onSwitchCycle: (cycle: CycleType) => void;
+  currentCycle: CycleType
+  onSwitchCycle: (cycle: CycleType) => void
 }) {
   return (
     <div className="flex items-center gap-2">
@@ -25,5 +25,5 @@ export default function CycleSelector({
         </button>
       ))}
     </div>
-  );
+  )
 }
