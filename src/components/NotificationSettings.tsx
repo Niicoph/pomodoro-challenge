@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NotificationSettings as NotificationSettingsType } from '../types/notifications'
+import { TimerSettings, TIMER_SETTINGS_BOUNDS } from '../types/timer'
 
 function Toggle({ enabled, onToggle }: { enabled: boolean; onToggle: () => void }) {
   return (
@@ -21,14 +22,77 @@ function Toggle({ enabled, onToggle }: { enabled: boolean; onToggle: () => void 
   )
 }
 
+function DurationInput({
+  label,
+  value,
+  onChange,
+}: {
+  label: string
+  value: number
+  onChange: (value: number) => void
+}) {
+  const [localValue, setLocalValue] = useState(String(value))
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLocalValue(e.target.value)
+    const num = parseInt(e.target.value, 10)
+    if (!isNaN(num)) {
+      onChange(Math.max(TIMER_SETTINGS_BOUNDS.min, Math.min(TIMER_SETTINGS_BOUNDS.max, num)))
+    }
+  }
+
+  const handleBlur = () => {
+    const num = parseInt(localValue, 10)
+    if (isNaN(num) || num < TIMER_SETTINGS_BOUNDS.min) {
+      setLocalValue(String(TIMER_SETTINGS_BOUNDS.min))
+      onChange(TIMER_SETTINGS_BOUNDS.min)
+    } else if (num > TIMER_SETTINGS_BOUNDS.max) {
+      setLocalValue(String(TIMER_SETTINGS_BOUNDS.max))
+      onChange(TIMER_SETTINGS_BOUNDS.max)
+    } else {
+      setLocalValue(String(num))
+    }
+  }
+
+  return (
+    <div className="flex items-center justify-between">
+      <span className="text-sm">{label}</span>
+      <div className="flex items-center gap-1">
+        <input
+          type="number"
+          min={TIMER_SETTINGS_BOUNDS.min}
+          max={TIMER_SETTINGS_BOUNDS.max}
+          step={1}
+          value={localValue}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className="w-16 py-1 text-center text-sm rounded-lg"
+          style={{
+            background: 'var(--color-bg-surface-hover)',
+            color: 'var(--color-text-primary)',
+            border: '1px solid var(--color-border)',
+          }}
+        />
+        <span className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
+          min
+        </span>
+      </div>
+    </div>
+  )
+}
+
 export default function NotificationSettings({
   settings,
   onUpdateSettings,
   onRequestPermission,
+  timerSettings,
+  onUpdateTimerSettings,
 }: {
   settings: NotificationSettingsType
   onUpdateSettings: (settings: Partial<NotificationSettingsType>) => void
   onRequestPermission: () => Promise<boolean>
+  timerSettings: TimerSettings
+  onUpdateTimerSettings: (settings: Partial<TimerSettings>) => void
 }) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -72,7 +136,7 @@ export default function NotificationSettings({
 
       {isOpen && (
         <div
-          className="absolute top-full right-0 mt-2 w-64 backdrop-blur-lg rounded-xl shadow-2xl p-4"
+          className="absolute top-full right-0 mt-2 w-72 backdrop-blur-lg rounded-xl shadow-2xl p-4"
           style={{
             background: 'var(--color-bg-surface)',
             color: 'var(--color-text-primary)',
@@ -95,6 +159,31 @@ export default function NotificationSettings({
                 <Toggle enabled={settings.browserEnabled} onToggle={handleBrowserToggle} />
               </div>
             )}
+          </div>
+
+          <div
+            className="my-3"
+            style={{ borderTop: '1px solid var(--color-border)' }}
+          />
+
+          <h3 className="text-sm font-semibold mb-3">Timer Durations</h3>
+
+          <div className="space-y-3">
+            <DurationInput
+              label="Work"
+              value={timerSettings.workMinutes}
+              onChange={(v) => onUpdateTimerSettings({ workMinutes: v })}
+            />
+            <DurationInput
+              label="Short Break"
+              value={timerSettings.shortBreakMinutes}
+              onChange={(v) => onUpdateTimerSettings({ shortBreakMinutes: v })}
+            />
+            <DurationInput
+              label="Long Break"
+              value={timerSettings.longBreakMinutes}
+              onChange={(v) => onUpdateTimerSettings({ longBreakMinutes: v })}
+            />
           </div>
         </div>
       )}
